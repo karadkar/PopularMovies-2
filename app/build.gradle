@@ -36,4 +36,8 @@ dependencies {
 
     // koin
     implementation "org.koin:koin-android-architecture:$koin_version"
+    testImplementation "org.koin:koin-test:$koin_version"
+
+    // mockito
+    testImplementation "org.mockito:mockito-core:$mockito_version"
 }
