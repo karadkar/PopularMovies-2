@@ -11,7 +11,7 @@ class KoinDryRunTest : KoinTest {
     @Test
     fun dependencyGraphDryRun() {
         // dummy properties
-        val params = mapOf(AppConstants.KEY_MOVIE_NAME to "dummy string")
+        val params = mapOf(AppConstants.KEY_MOVIE_GENRE to "dummy string")
 
         startKoin(list = appModules)
         dryRun()

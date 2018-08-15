@@ -20,12 +20,12 @@ class HomeScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
         // movie name
-        val movieName = "Interstellar"
+        val movieGenre = "Action / Comedy"
 
         // inject viewModel
         val viewModel = getViewModel<MovieListViewModel> {
             // sample parameter provided for constructor
-            mapOf(AppConstants.KEY_MOVIE_NAME to movieName)
+            mapOf(AppConstants.KEY_MOVIE_GENRE to movieGenre)
         }
 
         tv_homescreen_message.text = viewModel.sayHello()

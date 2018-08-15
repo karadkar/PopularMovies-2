@@ -1,7 +1,7 @@
 package io.github.karadkar.popularmovies.data
 
 import io.github.karadkar.popularmovies.MovieListViewModel
-import io.github.karadkar.popularmovies.utils.AppConstants.KEY_MOVIE_NAME
+import io.github.karadkar.popularmovies.utils.AppConstants.KEY_MOVIE_GENRE
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.context.ParameterProvider
 import org.koin.dsl.module.Module
@@ -21,8 +21,8 @@ val MovieListModule: Module = applicationContext {
     // provide new instance of ViewModel
     viewModel { params: ParameterProvider ->
         // get() will provide repository
-        // param movieName will be provided from Activity
-        MovieListViewModel(respository = get(), movieName = params[KEY_MOVIE_NAME])
+        // param genre will be provided from Activity
+        MovieListViewModel(respository = get(), genre = params[KEY_MOVIE_GENRE])
     }
 }
 

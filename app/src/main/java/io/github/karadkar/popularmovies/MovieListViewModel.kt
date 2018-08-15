@@ -5,7 +5,7 @@ import io.github.karadkar.popularmovies.data.MovieListRepository
 
 class MovieListViewModel(
         val respository: MovieListRepository,
-        val movieName: String
+        val genre: String
 ) : ViewModel() {
-    fun sayHello(): String = "${respository.giveHello()} - $movieName"
+    fun sayHello(): String = "${respository.giveHello()} - $genre"
 }
