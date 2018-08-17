@@ -10,10 +10,10 @@ import org.koin.test.dryRun
 class KoinDryRunTest : KoinTest {
     @Test
     fun dependencyGraphDryRun() {
-        // dummy properties
+        // dummy parameters
         val params = mapOf(AppConstants.KEY_MOVIE_GENRE to "dummy string")
 
         startKoin(list = appModules)
-        dryRun()
+        dryRun { params }
     }
 }
