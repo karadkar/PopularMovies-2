@@ -8,6 +8,6 @@ import org.koin.android.ext.android.startKoin
 class TestApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin(application = this, modules = appModules)
+        startKoin(context = this, modules = appModules)
     }
 }
