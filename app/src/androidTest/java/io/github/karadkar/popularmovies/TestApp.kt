@@ -1,16 +1,13 @@
 package io.github.karadkar.popularmovies
 
 import android.app.Application
+import io.github.karadkar.popularmovies.data.appModules
+import org.koin.android.ext.android.startKoin
 
-// Application call for Instrumentation test
+// Application class for Instrumentation test
 class TestApp : Application() {
     override fun onCreate() {
         super.onCreate()
-
-        /*
-        start koin for test
-        startKoin(this, testAppModules)
-        loadKoinModules(testAppModules)
-        */
+        startKoin(application = this, modules = appModules)
     }
 }
