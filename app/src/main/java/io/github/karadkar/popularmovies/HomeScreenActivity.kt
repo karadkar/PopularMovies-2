@@ -2,9 +2,9 @@ package io.github.karadkar.popularmovies
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import io.github.karadkar.popularmovies.utils.AppConstants
 import kotlinx.android.synthetic.main.activity_home_screen.*
-import org.koin.android.architecture.ext.getViewModel
+import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 
 class HomeScreenActivity : AppCompatActivity() {
 
@@ -25,7 +25,7 @@ class HomeScreenActivity : AppCompatActivity() {
         // inject viewModel
         val viewModel = getViewModel<MovieListViewModel> {
             // sample parameter provided for constructor
-            mapOf(AppConstants.KEY_MOVIE_GENRE to movieGenre)
+            parametersOf(movieGenre)
         }
 
         tv_homescreen_message.text = viewModel.sayHello()
