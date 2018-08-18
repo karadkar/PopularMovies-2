@@ -49,7 +49,9 @@ dependencies {
     androidTestImplementation "org.koin:koin-test:$koin_version"
 
     // mockito
-    testImplementation "com.nhaarman:mockito-kotlin:$kotlin_mockito"
-    androidTestImplementation "com.nhaarman:mockito-kotlin:$kotlin_mockito"
-    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
+//    testImplementation "com.nhaarman:mockito-kotlin:$kotlin_mockito"
+//    androidTestImplementation "com.nhaarman:mockito-kotlin:$kotlin_mockito"
+//    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
+    testImplementation 'org.mockito:mockito-core:2.18.3'
+    androidTestImplementation 'org.mockito:mockito-android:2.18.3'
 }

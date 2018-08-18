@@ -5,16 +5,16 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
 import io.github.karadkar.popularmovies.data.MovieListRepository
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.standalone.StandAloneContext.closeKoin
+import org.koin.standalone.StandAloneContext.stopKoin
+import org.koin.standalone.inject
 import org.koin.test.KoinTest
+import org.mockito.Mockito
 
 @RunWith(AndroidJUnit4::class)
 class HomeScreenActivityTest : KoinTest {
@@ -22,28 +22,18 @@ class HomeScreenActivityTest : KoinTest {
     @JvmField
     val rule = ActivityTestRule(HomeScreenActivity::class.java, true, true)
 
-    private val viewModelMock: MovieListViewModel = mock()
-
-    private val repositoryMock: MovieListRepository = mock()
+    private val viewModelMock: MovieListViewModel by inject()
+    private lateinit var repositoryMock: MovieListRepository
 
     @Before
     fun setup() {
-
-        /*loadKoinModules(applicationContext {
-            bean { repositoryMock }
-            viewModel<MovieListViewModel> { viewModelMock }
-        })*/
-
-        whenever(viewModelMock.sayHello())
+        Mockito.`when`(viewModelMock.sayHello())
                 .thenReturn("hello view-model")
-
-        whenever(repositoryMock.giveHello())
-                .thenReturn("hello repository")
     }
 
     @After
     fun cleanUp() {
-        closeKoin()
+        stopKoin()
     }
 
     @Test
