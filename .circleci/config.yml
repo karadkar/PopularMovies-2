@@ -24,6 +24,7 @@ jobs:
           name: Build apk
           command: ./gradlew assembleRelease
       - store_artifacts:
-#      pick artifact from
           path: app/build/outputs/apk
           destination: apk_output
+      - store_test_results:
+          path: app/build/reports/tests
