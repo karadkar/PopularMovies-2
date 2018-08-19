@@ -11,4 +11,5 @@
 .idea
 *.apk
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 buildSrc/build
