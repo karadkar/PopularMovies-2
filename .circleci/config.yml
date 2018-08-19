@@ -26,5 +26,6 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/apk
           destination: apk_output
-      - store_test_results:
+      - store_artifacts:
           path: app/build/reports/tests
+          destination: test_results
