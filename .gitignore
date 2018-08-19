@@ -11,3 +11,4 @@
 .idea
 *.apk
 *.jar
+buildSrc/build
