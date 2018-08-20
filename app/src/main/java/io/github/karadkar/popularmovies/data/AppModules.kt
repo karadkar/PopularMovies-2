@@ -17,8 +17,8 @@ val MovieListModule: Module = module {
     }
 
     // provide new instance of ViewModel
-    viewModel { (genre: String) ->
-        MovieListViewModel(respository = get(), genre = genre)
+    viewModel {
+        MovieListViewModel(respository = get())
     }
 }
 
