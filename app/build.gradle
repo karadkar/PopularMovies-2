@@ -53,4 +53,14 @@ dependencies {
     // mockito
     testImplementation Libs.mockitoCore
     androidTestImplementation Libs.mockitoAndroid
+
+    // RxJava
+    implementation Libs.rxJava
+    implementation Libs.rxAndroid
+
+    // retrofit
+    implementation Libs.retrofit
+    implementation Libs.retrofitRxAdapter
+    implementation Libs.gson
+    implementation Libs.gsonConverter
 }

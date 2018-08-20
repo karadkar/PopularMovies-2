@@ -17,6 +17,12 @@ object Versions {
     val junit = "4.12"
     val mockito = "2.18.3"
     val mockitoKotlin = "1.5.0"
+
+    val retrofit = "2.3.0"
+    val retrofitRxAdapter = "1.0.0"
+    val rxJava = "2.1.7"
+    val rxAndroid = "2.0.1"
+    val gson = "2.8.0"
 }
 
 object Libs {
@@ -49,5 +55,14 @@ object Libs {
     val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
     val mockitoAndroid = "org.mockito:mockito-android:${Versions.mockito}"
     val mockitoKotin = "com.nhaarman:mockito-kotlin:${Versions.mockitoKotlin}"
+
+    // retrofit
+    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    val gson = "com.google.code.gson:gson:${Versions.gson}"
+
+    val retrofitRxAdapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${Versions.retrofitRxAdapter}"
+    val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
+    val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
 
 }
