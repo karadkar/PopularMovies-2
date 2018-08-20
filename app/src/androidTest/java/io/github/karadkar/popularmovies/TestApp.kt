@@ -1,6 +1,7 @@
 package io.github.karadkar.popularmovies
 
 import android.app.Application
+import io.github.karadkar.popularmovies.data.appModules
 import org.koin.android.ext.android.startKoin
 
 // needs testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner" to defaultConfig
@@ -8,6 +9,6 @@ import org.koin.android.ext.android.startKoin
 class TestApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin(context = this, modules = listOf())
+        startKoin(context = this, modules = appModules)
     }
 }

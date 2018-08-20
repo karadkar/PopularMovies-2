@@ -1,5 +1,6 @@
 package io.github.karadkar.popularmovies
 
+import android.arch.lifecycle.ViewModel
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -11,10 +12,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.get
+import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.koin.test.declareMock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 
 @RunWith(AndroidJUnit4::class)
 class HomeScreenActivityTest : KoinTest {
@@ -22,11 +23,12 @@ class HomeScreenActivityTest : KoinTest {
     @JvmField
     val rule = ActivityTestRule(HomeScreenActivity::class.java, true, true)
 
+    val viewModel: MovieListViewModel by inject()
+
+
     @Before
     fun setup() {
-        declareMock<MovieListViewModel>()
-        Mockito.`when`(get<MovieListViewModel>().sayHello())
-                .thenReturn("hello view-model")
+        declareMock<MovieListViewModel>(isFactory = true, binds = listOf(ViewModel::class))
     }
 
     @After
@@ -35,7 +37,11 @@ class HomeScreenActivityTest : KoinTest {
     }
 
     @Test
-    fun shouldHaveTextView() {
+    fun shouldHaveTextViewVisible() {
+
+        `when`(viewModel.sayHello())
+                .thenReturn("hello view-model")
+
         onView(withId(R.id.tv_homescreen_message))
                 .check(matches(isDisplayed()))
 
