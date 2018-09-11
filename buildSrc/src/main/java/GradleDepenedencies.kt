@@ -9,7 +9,7 @@ object Versions {
     val constraintLayout = "1.1.2"
     val archExtensions = "1.1.1"
 
-    val koin = "1.0.0-beta-6"
+    val koin = "1.0.0-RC-3"
     val kotlin = "1.2.61"
 
     val androidTestSupportLib = "1.0.2"
