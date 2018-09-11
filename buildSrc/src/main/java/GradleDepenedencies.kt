@@ -23,6 +23,7 @@ object Versions {
     val rxJava = "2.1.7"
     val rxAndroid = "2.0.1"
     val gson = "2.8.0"
+    val okhttpLogger = "3.9.1"
 }
 
 object Libs {
@@ -60,6 +61,7 @@ object Libs {
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val gson = "com.google.code.gson:gson:${Versions.gson}"
+    val okhttpLogger = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLogger}"
 
     val retrofitRxAdapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${Versions.retrofitRxAdapter}"
     val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"

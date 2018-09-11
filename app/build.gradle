@@ -67,4 +67,5 @@ dependencies {
     implementation Libs.retrofitRxAdapter
     implementation Libs.gson
     implementation Libs.gsonConverter
+    implementation Libs.okhttpLogger
 }
