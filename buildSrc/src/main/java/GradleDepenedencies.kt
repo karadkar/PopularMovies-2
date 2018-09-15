@@ -23,7 +23,8 @@ object Versions {
     val rxJava = "2.1.7"
     val rxAndroid = "2.0.1"
     val gson = "2.8.0"
-    val okhttpLogger = "3.9.1"
+    val okhttp = "3.9.1"
+    val robolectric = "3.6.1"
 }
 
 object Libs {
@@ -51,6 +52,7 @@ object Libs {
     val atsRules = "com.android.support.test:rules:${Versions.androidTestSupportLib}"
     val espresso = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
     val junit = "junit:junit:${Versions.junit}"
+    val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 
     // mockito
     val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
@@ -61,10 +63,11 @@ object Libs {
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val gson = "com.google.code.gson:gson:${Versions.gson}"
-    val okhttpLogger = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLogger}"
+    val okhttpLogger = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
     val retrofitRxAdapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${Versions.retrofitRxAdapter}"
     val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
+    val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okhttp}"
 
 }

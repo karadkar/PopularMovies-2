@@ -68,4 +68,6 @@ dependencies {
     implementation Libs.gson
     implementation Libs.gsonConverter
     implementation Libs.okhttpLogger
+    implementation Libs.mockWebServer
+    implementation Libs.robolectric
 }
