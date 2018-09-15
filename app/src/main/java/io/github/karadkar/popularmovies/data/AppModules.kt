@@ -25,7 +25,7 @@ val MovieListModule: Module = module {
 
     // provide singleton of list repository
     single {
-        DummyMovieListRepository(tmdbMoviesApi = get()) as MovieListRepository
+        DummyMovieListRepository() as MovieListRepository
     }
 
     // provide new instance of ViewModel
