@@ -1,5 +1,6 @@
 package io.github.karadkar.popularmovies.data
 
+import android.content.Context
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.github.karadkar.popularmovies.BuildConfig
@@ -48,8 +49,11 @@ val netWorkModule = module {
     // okhttp cache
     single {
         val cacheSize = 10 * 1024 * 1024 // 10MB
-        return@single Cache(androidContext().cacheDir, cacheSize.toLong())
+        return@single Cache(get<Context>().cacheDir, cacheSize.toLong())
     }
+
+    // context
+    factory { androidContext() }
 
     // Http logging
     single {

@@ -1,9 +1,10 @@
 package io.github.karadkar.popularmovies
 
+import android.content.Context
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import io.github.karadkar.popularmovies.data.MovieListModule
 import io.github.karadkar.popularmovies.data.netWorkModule
 import io.github.karadkar.popularmovies.data.tmdbApiModule
-import okhttp3.Cache
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.koin.dsl.module.module
@@ -15,10 +16,9 @@ val retrofitModule = module {
     // mock web  server
     factory { MockWebServer() }
 
-    // override cache dir with robolectric
-    single(override = true) {
-        val cacheSize = 10 * 1024 * 1024 // 10MB
-        return@single Cache(RuntimeEnvironment.application.cacheDir, cacheSize.toLong())
+    // context
+    factory(override = true) {
+        RuntimeEnvironment.application as Context
     }
 
     // retrofit
@@ -31,4 +31,4 @@ val retrofitModule = module {
     }
 }
 
-val testDiModules = listOf(netWorkModule, tmdbApiModule, retrofitModule)
+val testDiModules = listOf(netWorkModule, tmdbApiModule, MovieListModule, retrofitModule)
