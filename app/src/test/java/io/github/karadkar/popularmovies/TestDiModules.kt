@@ -2,9 +2,7 @@ package io.github.karadkar.popularmovies
 
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import io.github.karadkar.popularmovies.data.MovieListModule
-import io.github.karadkar.popularmovies.data.netWorkModule
-import io.github.karadkar.popularmovies.data.tmdbApiModule
+import io.github.karadkar.popularmovies.data.appModules
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.koin.dsl.module.module
@@ -33,5 +31,5 @@ val retrofitModule = module {
     }
 }
 
-val testApiServiceModules = listOf(netWorkModule, tmdbApiModule, MovieListModule, contextModule, retrofitModule)
-val testModules = mutableListOf(netWorkModule, tmdbApiModule, MovieListModule, contextModule)
+val testApiServiceModules = appModules + contextModule + retrofitModule
+val testModules = appModules + contextModule

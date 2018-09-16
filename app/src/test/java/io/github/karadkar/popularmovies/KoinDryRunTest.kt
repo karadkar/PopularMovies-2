@@ -1,6 +1,5 @@
 package io.github.karadkar.popularmovies
 
-import io.github.karadkar.popularmovies.data.appModules
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest

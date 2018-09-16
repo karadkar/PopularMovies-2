@@ -98,4 +98,4 @@ val tmdbApiModule = module {
 /**
  * Module list
  */
-val appModules = listOf(netWorkModule, tmdbApiModule, MovieListModule)
+val appModules = mutableListOf(netWorkModule, tmdbApiModule, MovieListModule)
