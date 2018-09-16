@@ -53,7 +53,7 @@ val netWorkModule = module {
     }
 
     // context
-    factory { androidContext() }
+    single { androidContext() }
 
     // Http logging
     single {

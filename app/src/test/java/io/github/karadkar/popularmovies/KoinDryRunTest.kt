@@ -13,6 +13,6 @@ import org.robolectric.annotation.Config
 class KoinDryRunTest : KoinTest {
     @Test
     fun dependencyGraphDryRun() {
-        checkModules(appModules)
+        checkModules(testModules)
     }
 }

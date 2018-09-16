@@ -26,7 +26,7 @@ class TmdbMoviesApiTest : KoinTest {
     lateinit var tmdbMoviesApi: TmdbMoviesApi
     @Before
     fun setup() {
-        startKoin(testDiModules)
+        startKoin(testApiServiceModules)
         mockWebServer = get()
         val retrofit: Retrofit = get { parametersOf(mockWebServer.url("/")) }
         tmdbMoviesApi = retrofit.create(TmdbMoviesApi::class.java)
