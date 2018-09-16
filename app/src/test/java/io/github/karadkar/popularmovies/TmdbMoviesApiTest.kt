@@ -5,6 +5,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.Okio
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +19,7 @@ import retrofit2.Retrofit
 import java.nio.charset.StandardCharsets
 
 @RunWith(RobolectricTestRunner::class)
+@Config(manifest = Config.NONE, sdk = [23])
 class TmdbMoviesApiTest : KoinTest {
 
     lateinit var mockWebServer: MockWebServer
@@ -47,8 +49,10 @@ class TmdbMoviesApiTest : KoinTest {
                 .run {
                     assertNoErrors()
                     assertValueCount(1)
-                    val result = values()[0]
-                    assert(result.page == 1)
+                    val tmdbResult = values()[0]
+                    assertEquals(tmdbResult.page, 1)
+                    assertEquals(tmdbResult.results.size, 20)
+                    assertEquals(tmdbResult.results[0].title, "The Nun")
                 }
     }
 
