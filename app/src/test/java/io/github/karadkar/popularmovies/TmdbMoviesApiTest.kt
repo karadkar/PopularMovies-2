@@ -11,6 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.parameter.parametersOf
 import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.get
 import org.koin.test.KoinTest
 import org.robolectric.RobolectricTestRunner
@@ -34,6 +35,7 @@ class TmdbMoviesApiTest : KoinTest {
 
     @After
     fun tearDown() {
+        stopKoin()
         mockWebServer.shutdown()
     }
 
@@ -53,6 +55,25 @@ class TmdbMoviesApiTest : KoinTest {
                     assertEquals(tmdbResult.page, 1)
                     assertEquals(tmdbResult.results.size, 20)
                     assertEquals(tmdbResult.results[0].title, "The Nun")
+                }
+    }
+
+    @Test
+    fun getTopRatedMovies() {
+        mockWebServer.enqueue(MockResponse().apply {
+            setResponseCode(200)
+            setBody(getResponseFromJson("top-rated"))
+        })
+
+        tmdbMoviesApi.getTopRated("api-key")
+                .test()
+                .run {
+                    assertNoErrors()
+                    assertValueCount(1)
+                    val tmdbResult = values()[0]
+                    assertEquals(tmdbResult.page, 1)
+                    assertEquals(tmdbResult.results.size, 20)
+                    assertEquals(tmdbResult.results[0].title, "Dilwale Dulhania Le Jayenge")
                 }
     }
 

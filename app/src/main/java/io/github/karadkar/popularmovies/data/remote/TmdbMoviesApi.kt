@@ -11,4 +11,7 @@ interface TmdbMoviesApi {
     @GET("/3/movie/popular")
     fun getPopularMovies(@Query("api_key") apiKey: String): Single<TmdbResult>
 
+    @GET("/3/movie/top_rated")
+    fun getTopRated(@Query("api_key") apiKey: String): Single<TmdbResult>
+
 }
