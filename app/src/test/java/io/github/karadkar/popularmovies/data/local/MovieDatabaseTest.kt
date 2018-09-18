@@ -14,7 +14,7 @@ import org.robolectric.RuntimeEnvironment
 @RunWith(RobolectricTestRunner::class)
 class MovieDatabaseTest {
 
-    //allows test to run synchronously
+    // [imp] allows test to run synchronously
     @Rule
     @JvmField
     var executor = InstantTaskExecutorRule()
@@ -51,5 +51,18 @@ class MovieDatabaseTest {
         val movie = movies[2]
         database.movieDao().findById(movieId = movie.id)
                 .test().assertValue(movie)
+    }
+
+    @Test
+    fun getPopularMovies() {
+        // popularity is decided by movie.popularity rank. (higher is better)
+        val movies = MovieEntityDataFactory.getMovieEntities(50)
+        database.movieDao().save(movies)
+
+        val testSub = database.movieDao().getPopular().test()
+
+        // assert that movies are sorted by descending order of popularity
+        testSub.assertNever(movies)
+        testSub.assertValue(movies.sortedByDescending { it.popularity })
     }
 }

@@ -11,6 +11,9 @@ interface MovieDao {
     @Query("SELECT * FROM MOVIE")
     fun getAll(): Flowable<List<MovieEntity>>
 
+    @Query("SELECT * FROM MOVIE ORDER BY popularity DESC")
+    fun getPopular(): Flowable<List<MovieEntity>>
+
     @Insert
     fun save(movies: List<MovieEntity>)
 
