@@ -48,6 +48,7 @@ dependencies {
 
     // architecture component
     implementation Libs.archExtensions
+    implementation Libs.archCoreTesting
 
     // koin
     implementation Libs.koinAndroidViewModel
@@ -70,4 +71,10 @@ dependencies {
     implementation Libs.okhttpLogger
     testImplementation Libs.mockWebServer
     testImplementation Libs.robolectric
+
+    // room
+    implementation Libs.roomRuntime
+    kapt Libs.roomCompiler
+    testImplementation Libs.roomTesting
+    implementation Libs.roomRxJava2
 }

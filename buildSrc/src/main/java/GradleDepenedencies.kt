@@ -25,11 +25,14 @@ object Versions {
     val gson = "2.8.0"
     val okhttp = "3.9.1"
     val robolectric = "3.6.1"
+
+    val room = "1.1.1"
 }
 
 object Libs {
     // android
     val archExtensions = "android.arch.lifecycle:extensions:${Versions.archExtensions}"
+    val archCoreTesting = "android.arch.core:core-testing:${Versions.archExtensions}"
 
     // android support
     val appCompat = "com.android.support:appcompat-v7:${Versions.androidSupportLib}"
@@ -69,5 +72,11 @@ object Libs {
     val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okhttp}"
+
+    // room
+    val roomRuntime = "android.arch.persistence.room:runtime:${Versions.room}"
+    val roomCompiler = "android.arch.persistence.room:compiler:${Versions.room}"
+    val roomRxJava2 = "android.arch.persistence.room:rxjava2:${Versions.room}"
+    val roomTesting = "android.arch.persistence.room:testing:${Versions.room}"
 
 }
