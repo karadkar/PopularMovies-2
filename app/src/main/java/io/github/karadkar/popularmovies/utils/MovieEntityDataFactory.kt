@@ -3,10 +3,10 @@ package io.github.karadkar.popularmovies.utils
 import io.github.karadkar.popularmovies.data.local.MovieEntity
 
 object MovieEntityDataFactory {
-    fun getMovieEntity(): MovieEntity {
+    fun getMovieEntity(movieId: Int = DataFactory.randomInt()): MovieEntity {
         return MovieEntity(
                 voteCount = DataFactory.randomInt(),
-                id = DataFactory.randomInt(),
+                id = movieId,
                 video = DataFactory.randomBoolean(),
                 voteAverage = DataFactory.randomDouble(),
                 title = DataFactory.randomString(),
@@ -25,9 +25,8 @@ object MovieEntityDataFactory {
     fun getMovieEntities(size: Int = 10): List<MovieEntity> {
         return ArrayList<MovieEntity>().apply {
             for (i in 1..size) {
-                add(getMovieEntity())
+                add(getMovieEntity(i))
             }
-            sortBy { it.id }
         }
     }
 }

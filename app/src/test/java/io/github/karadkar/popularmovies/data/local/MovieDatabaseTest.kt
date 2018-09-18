@@ -39,8 +39,11 @@ class MovieDatabaseTest {
         val movies = MovieEntityDataFactory.getMovieEntities(50)
         database.movieDao().save(movies)
 
+        // allAll return movies sorted by id
         val testSub = database.movieDao().getAll().test()
-        testSub.assertValue(movies)
+
+        testSub.assertNever(movies.sortedByDescending { it.id })
+        testSub.assertValue(movies.sortedBy { it.id })
     }
 
     @Test
