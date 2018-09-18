@@ -37,7 +37,7 @@ class MovieDatabaseTest {
     fun saveMovies() {
         // list is sorted by movie.id
         val movies = MovieEntityDataFactory.getMovieEntities(50)
-        database.movieDao().save(movies)
+        database.movieDao().saveOrUpdate(movies)
 
         // allAll return movies sorted by id
         val testSub = database.movieDao().getAll().test()
@@ -47,9 +47,18 @@ class MovieDatabaseTest {
     }
 
     @Test
+    fun updateMovie() {
+        val movies = MovieEntityDataFactory.getMovieEntities(5)
+
+        database.movieDao().saveOrUpdate(movies)
+        database.movieDao().saveOrUpdate(movies) // this should not fail
+        database.movieDao().getAll().test().assertValue { it.size == 5 }
+    }
+
+    @Test
     fun getMovieById() {
         val movies = MovieEntityDataFactory.getMovieEntities(5)
-        database.movieDao().save(movies)
+        database.movieDao().saveOrUpdate(movies)
 
         val movie = movies[2]
         database.movieDao().findById(movieId = movie.id)
@@ -60,7 +69,7 @@ class MovieDatabaseTest {
     fun getPopularMovies() {
         // popularity is decided by movie.popularity rank. (higher is better)
         val movies = MovieEntityDataFactory.getMovieEntities(50)
-        database.movieDao().save(movies)
+        database.movieDao().saveOrUpdate(movies)
 
         val testSub = database.movieDao().getPopular().test()
 

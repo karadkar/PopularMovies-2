@@ -16,7 +16,7 @@ interface MovieDao {
     fun getPopular(): Flowable<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(movies: List<MovieEntity>)
+    fun saveOrUpdate(movies: List<MovieEntity>)
 
     @Query("SELECT * FROM MOVIE WHERE id=:movieId")
     fun findById(movieId: Int): Flowable<MovieEntity>
