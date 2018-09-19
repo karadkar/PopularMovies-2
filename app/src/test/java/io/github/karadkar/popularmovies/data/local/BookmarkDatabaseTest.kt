@@ -11,12 +11,12 @@ class BookmarkDatabaseTest : BaseDatabaseTest<MovieDatabase>(MovieDatabase::clas
         database.movieDao().saveOrUpdate(movies)
         val movie = movies[10]
 
-        // add bookmark
+        // add as bookmarked
         database.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movie.id, bookmarked = true))
         database.bookmarkDao().getBookmark(movieId = movie.id)
                 .test().assertValue { it.movieId == movie.id && it.bookmarked }
 
-        // remove bookmark
+        // remove as bookmarked
         database.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movie.id, bookmarked = false))
         database.bookmarkDao().getBookmark(movieId = movie.id)
                 .test().assertValue { it.movieId == movie.id && !it.bookmarked }
