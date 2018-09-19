@@ -21,4 +21,14 @@ class BookmarkDatabaseTest : BaseDatabaseTest<MovieDatabase>(MovieDatabase::clas
         database.bookmarkDao().getBookmark(movieId = movie.id)
                 .test().assertValue { it.movieId == movie.id && !it.bookmarked }
     }
+
+    // deleting movie should delete bookmark entry
+    @Test
+    fun cascadeDelete() {
+        val movie = MovieEntityDataFactory.getMovieEntity(100)
+        database.movieDao().saveOrUpdate(listOf(movie))
+        database.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movie.id, bookmarked = true))
+
+        // todo: write delete
+    }
 }
