@@ -1,6 +1,6 @@
-package io.github.karadkar.popularmovies
+package io.github.karadkar.popularmovies.data.remote
 
-import io.github.karadkar.popularmovies.data.remote.TmdbMoviesApi
+import io.github.karadkar.popularmovies.testApiServiceModules
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.Okio
