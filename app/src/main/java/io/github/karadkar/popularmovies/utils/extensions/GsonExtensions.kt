@@ -1,4 +1,4 @@
-package io.github.karadkar.popularmovies.utils
+package io.github.karadkar.popularmovies.utils.extensions
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
