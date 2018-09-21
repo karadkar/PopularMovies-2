@@ -3,14 +3,14 @@
  * check https://handstandsam.com/2018/02/11/kotlin-buildsrc-for-better-gradle-dependency-management/
  */
 object Versions {
-    val gradlePlugin = "3.1.3"
+    val gradlePlugin = "3.1.4"
 
     val androidSupportLib = "27.1.1"
     val constraintLayout = "1.1.2"
     val archExtensions = "1.1.1"
 
     val koin = "1.0.0"
-    val kotlin = "1.2.61"
+    val kotlin = "1.2.70"
 
     val androidTestSupportLib = "1.0.2"
     val espresso = "3.0.2"
