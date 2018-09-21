@@ -10,26 +10,18 @@ import org.robolectric.RuntimeEnvironment
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val contextModule = module {
+private val contextModule = module {
     // context
     single(override = true) {
         RuntimeEnvironment.application as Context
     }
 }
 
-val retrofitModule = module {
+private val mockWebModule = module {
     // mock web  server
     factory { MockWebServer() }
 
-    // retrofit
-    factory<Retrofit>(override = true) { (baseUrl: HttpUrl) ->
-        Retrofit.Builder().baseUrl(baseUrl)
-                .addConverterFactory(get<GsonConverterFactory>())
-                .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
-                .client(get())
-                .build()
-    }
 }
 
-val testApiServiceModules = appModules + contextModule + retrofitModule
+val testApiServiceModules = appModules + contextModule + mockWebModule
 val testModules = appModules + contextModule

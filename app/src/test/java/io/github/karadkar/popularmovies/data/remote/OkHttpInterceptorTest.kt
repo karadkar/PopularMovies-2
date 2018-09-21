@@ -9,7 +9,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext
 import org.koin.standalone.get
@@ -30,6 +29,12 @@ class OkHttpInterceptorTest : KoinTest {
     @Before
     fun setup() {
         StandAloneContext.startKoin(testApiServiceModules + module {
+
+            // override base url
+            single<HttpUrl>(name = "base-url", override = true) {
+                mockWebServer.url("/")
+            }
+
             // override provided okhttp client
             single<OkHttpClient>(override = true) {
                 OkHttpClient.Builder()
@@ -40,7 +45,7 @@ class OkHttpInterceptorTest : KoinTest {
 
         mockWebServer = get()
         mockStatusWebServer = get()
-        val retrofit: Retrofit = get { parametersOf(mockWebServer.url("/")) }
+        val retrofit: Retrofit = get()
         tmdbMoviesApi = retrofit.create(TmdbMoviesApi::class.java)
 
         mockWebServer.mockResponse {

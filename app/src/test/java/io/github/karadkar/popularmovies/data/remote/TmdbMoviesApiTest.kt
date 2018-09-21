@@ -3,13 +3,14 @@ package io.github.karadkar.popularmovies.data.remote
 import io.github.karadkar.popularmovies.mockResponse
 import io.github.karadkar.popularmovies.testApiServiceModules
 import io.github.karadkar.popularmovies.utils.JsonUtils
+import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.parameter.parametersOf
+import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.get
@@ -26,9 +27,13 @@ class TmdbMoviesApiTest : KoinTest {
     lateinit var tmdbMoviesApi: TmdbMoviesApi
     @Before
     fun setup() {
-        startKoin(testApiServiceModules)
+        startKoin(testApiServiceModules + module {
+            single<HttpUrl>(name = "base-url", override = true) {
+                mockWebServer.url("/")
+            }
+        })
         mockWebServer = get()
-        val retrofit: Retrofit = get { parametersOf(mockWebServer.url("/")) }
+        val retrofit: Retrofit = get()
         tmdbMoviesApi = retrofit.create(TmdbMoviesApi::class.java)
     }
 

@@ -8,6 +8,7 @@ import io.github.karadkar.popularmovies.MovieListViewModel
 import io.github.karadkar.popularmovies.data.remote.TmdbMoviesApi
 import io.github.karadkar.popularmovies.utils.AppConstants
 import okhttp3.Cache
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -78,9 +79,14 @@ val netWorkModule = module {
         return@single client.build()
     }
 
+    // thi url can be overriden by mockWebServer url during test
+    single<HttpUrl>("base-url") {
+        HttpUrl.parse(AppConstants.BASE_URL)!!
+    }
+
     // retrofit
     single<Retrofit> {
-        Retrofit.Builder().baseUrl(AppConstants.BASE_URL)
+        Retrofit.Builder().baseUrl(get<HttpUrl>("base-url"))
                 .addConverterFactory(get<GsonConverterFactory>())
                 .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
                 .client(get())
