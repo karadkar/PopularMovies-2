@@ -1,8 +1,8 @@
 package io.github.karadkar.popularmovies.data.remote
 
+import io.github.karadkar.popularmovies.mockResponse
 import io.github.karadkar.popularmovies.testApiServiceModules
 import io.github.karadkar.popularmovies.utils.JsonUtils
-import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -40,10 +40,10 @@ class TmdbMoviesApiTest : KoinTest {
 
     @Test
     fun getPopularMovies() {
-        mockWebServer.enqueue(MockResponse().apply {
+        mockWebServer.mockResponse {
             setResponseCode(200)
             setBody(JsonUtils.readJsonFile("popular"))
-        })
+        }
 
         tmdbMoviesApi.getPopularMovies("api-key")
                 .test()
@@ -59,10 +59,10 @@ class TmdbMoviesApiTest : KoinTest {
 
     @Test
     fun getTopRatedMovies() {
-        mockWebServer.enqueue(MockResponse().apply {
+        mockWebServer.mockResponse {
             setResponseCode(200)
             setBody(JsonUtils.readJsonFile("top-rated"))
-        })
+        }
 
         tmdbMoviesApi.getTopRated("api-key")
                 .test()
