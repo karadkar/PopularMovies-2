@@ -1,9 +1,9 @@
 package io.github.karadkar.popularmovies.data.remote
 
 import io.github.karadkar.popularmovies.testApiServiceModules
+import io.github.karadkar.popularmovies.utils.JsonUtils
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import okio.Okio
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -17,7 +17,6 @@ import org.koin.test.KoinTest
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import retrofit2.Retrofit
-import java.nio.charset.StandardCharsets
 
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE, sdk = [23])
@@ -43,7 +42,7 @@ class TmdbMoviesApiTest : KoinTest {
     fun getPopularMovies() {
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(getResponseFromJson("popular"))
+            setBody(JsonUtils.readJsonFile("popular"))
         })
 
         tmdbMoviesApi.getPopularMovies("api-key")
@@ -62,7 +61,7 @@ class TmdbMoviesApiTest : KoinTest {
     fun getTopRatedMovies() {
         mockWebServer.enqueue(MockResponse().apply {
             setResponseCode(200)
-            setBody(getResponseFromJson("top-rated"))
+            setBody(JsonUtils.readJsonFile("top-rated"))
         })
 
         tmdbMoviesApi.getTopRated("api-key")
@@ -75,13 +74,5 @@ class TmdbMoviesApiTest : KoinTest {
                     assertEquals(tmdbResult.results.size, 20)
                     assertEquals(tmdbResult.results[0].title, "Dilwale Dulhania Le Jayenge")
                 }
-    }
-
-
-    fun getResponseFromJson(fileName: String): String {
-        val inputStream = javaClass.classLoader
-                .getResourceAsStream("tmdb-api/$fileName.json")
-        val source = Okio.buffer(Okio.source(inputStream))
-        return source.readString(StandardCharsets.UTF_8)
     }
 }
