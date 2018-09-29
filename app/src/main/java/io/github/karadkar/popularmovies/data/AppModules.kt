@@ -1,12 +1,24 @@
 package io.github.karadkar.popularmovies.data
 
+import android.arch.persistence.room.Room
 import android.content.Context
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.github.karadkar.popularmovies.BuildConfig
 import io.github.karadkar.popularmovies.MovieListViewModel
+import io.github.karadkar.popularmovies.data.base.Movie
+import io.github.karadkar.popularmovies.data.base.MoviesDataContract
+import io.github.karadkar.popularmovies.data.local.MovieDatabase
+import io.github.karadkar.popularmovies.data.local.MovieEntity
+import io.github.karadkar.popularmovies.data.local.MoviesLocalData
+import io.github.karadkar.popularmovies.data.mapper.EntityMapper
+import io.github.karadkar.popularmovies.data.mapper.MovieMapper
 import io.github.karadkar.popularmovies.data.remote.TmdbMoviesApi
 import io.github.karadkar.popularmovies.utils.AppConstants
+import io.github.karadkar.popularmovies.utils.RxScheduler
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -54,7 +66,7 @@ val netWorkModule = module {
     }
 
     // context
-    single { androidContext() }
+    factory { androidContext() }
 
     // Http logging
     single {
@@ -94,6 +106,30 @@ val netWorkModule = module {
     }
 }
 
+private val movieDataModule = module {
+    // movie database
+    single {
+        Room.databaseBuilder(get(), MovieDatabase::class.java, "movies.db")
+                .build()
+    }
+
+    // scheduler
+    single<RxScheduler> {
+        object : RxScheduler {
+            override fun mainThread(): Scheduler = AndroidSchedulers.mainThread()
+            override fun workerThread(): Scheduler = Schedulers.io()
+        }
+    }
+
+    // mapper
+    single<EntityMapper<Movie, MovieEntity>> { MovieMapper() }
+
+    // local data source
+    single<MoviesDataContract.Local> {
+        MoviesLocalData(db = get(), mapper = get(), scheduler = get())
+    }
+}
+
 val tmdbApiModule = module {
     single<TmdbMoviesApi> {
         val retrofit: Retrofit = get()
@@ -104,4 +140,4 @@ val tmdbApiModule = module {
 /**
  * Module list
  */
-val appModules = mutableListOf(netWorkModule, tmdbApiModule, MovieListModule)
+val appModules = mutableListOf(netWorkModule, tmdbApiModule, MovieListModule, movieDataModule)
