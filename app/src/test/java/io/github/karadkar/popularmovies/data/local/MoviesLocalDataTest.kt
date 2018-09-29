@@ -39,13 +39,11 @@ class MoviesLocalDataTest : KoinTest {
     }
 
 
-//    @Test
-//    fun getPopularMovies() {
-//        db.movieDao().saveOrUpdate(movieEntities)
-//        localRepo.getPopularMovies().test().apply {
-//            this.assertValue { it.size == movieEntities.size }
-//        }
-//    }
+    @Test
+    fun getPopularMovies() {
+        db.movieDao().saveOrUpdate(movieEntities)
+        localRepo.getPopularMovies().test().assertValue(movieEntities.sortedByDescending { it.popularity })
+    }
 
     @Test
     fun setBookmarked() {
