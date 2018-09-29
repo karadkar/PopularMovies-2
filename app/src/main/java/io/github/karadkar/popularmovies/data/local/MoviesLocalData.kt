@@ -12,7 +12,7 @@ class MoviesLocalData(private val db: MovieDatabase,
                       private val mapper: EntityMapper<Movie, MovieEntity>,
                       private val scheduler: RxScheduler) : MoviesDataContract.Local {
     override fun getPopularMovies(): Flowable<List<Movie>> {
-        return db.movieDao().getPopular().map { it - it }
+        return db.movieDao().getPopular().map { it -> it }
     }
 
     override fun setBookmarked(movieId: String): Completable {
