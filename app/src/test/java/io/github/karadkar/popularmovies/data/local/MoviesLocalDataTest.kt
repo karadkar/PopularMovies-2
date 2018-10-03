@@ -34,7 +34,6 @@ class MoviesLocalDataTest : KoinTest {
 
     @After
     fun tearDown() {
-        db.movieDao().deleteMovies(movieEntities)
         stopKoin()
     }
 
