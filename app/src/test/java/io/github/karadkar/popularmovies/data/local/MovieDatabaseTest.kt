@@ -1,18 +1,21 @@
 package io.github.karadkar.popularmovies.data.local
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
+import io.github.karadkar.popularmovies.robolectricModules
 import io.github.karadkar.popularmovies.utils.MovieEntityDataFactory
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
+import org.koin.standalone.get
+import org.koin.test.KoinTest
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class MovieDatabaseTest {
+class MovieDatabaseTest : KoinTest {
 
     // [imp] allows test to run synchronously
     @Rule
@@ -23,14 +26,13 @@ class MovieDatabaseTest {
 
     @Before
     fun setupDb() {
-        database = Room.inMemoryDatabaseBuilder(
-                RuntimeEnvironment.application.applicationContext, MovieDatabase::class.java)
-                .allowMainThreadQueries().build()
+        startKoin(robolectricModules)
+        database = get()
     }
 
     @After
     fun close() {
-        database.close()
+        stopKoin()
     }
 
     @Test
@@ -76,5 +78,22 @@ class MovieDatabaseTest {
         // assert that movies are sorted by descending order of popularity
         testSub.assertNever(movies)
         testSub.assertValue(movies.sortedByDescending { it.popularity })
+    }
+
+    @Test
+    fun updateBookmark() {
+        val movies = MovieEntityDataFactory.getMovieEntities(50)
+        database.movieDao().saveOrUpdate(movies)
+        val movie = movies[10]
+
+        // add as bookmarked
+        database.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movie.id, bookmarked = true))
+        database.bookmarkDao().getBookmark(movieId = movie.id)
+                .test().assertValue { it.movieId == movie.id && it.bookmarked }
+
+        // remove as bookmarked
+        database.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movie.id, bookmarked = false))
+        database.bookmarkDao().getBookmark(movieId = movie.id)
+                .test().assertValue { it.movieId == movie.id && !it.bookmarked }
     }
 }
