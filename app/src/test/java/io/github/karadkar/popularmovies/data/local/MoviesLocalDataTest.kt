@@ -45,11 +45,50 @@ class MoviesLocalDataTest : KoinTest {
     }
 
     @Test
+    fun updateBookmarkShouldFail() {
+        // update bookmark should fail with invalid movie id
+        // also happens when movie is not in database
+        localRepo.setBookmarked(9999).test().assertNotComplete()
+        localRepo.setUnBookmarked(9999).test().assertNotComplete()
+    }
+    @Test
     fun setBookmarked() {
+        val movie = MovieEntityDataFactory.getMovieEntity()
+
+        // save movie
+        db.movieDao().saveOrUpdate(listOf(movie))
+
+        // verify bookmarked
+        localRepo.setBookmarked(movie.id).test().assertComplete()
+        db.bookmarkDao().getBookmark(movie.id).test().assertValue { it.bookmarked }
     }
 
     @Test
     fun setUnBookmarked() {
+        val movie = MovieEntityDataFactory.getMovieEntity()
+
+        // save movie
+        db.movieDao().saveOrUpdate(listOf(movie))
+
+        // verify un-bookmarked
+        localRepo.setUnBookmarked(movie.id).test().assertComplete()
+        db.bookmarkDao().getBookmark(movie.id).test().assertValue { !it.bookmarked }
+    }
+
+    @Test
+    fun bookmarkOperation() {
+        val movie = MovieEntityDataFactory.getMovieEntity()
+
+        // save movie
+        db.movieDao().saveOrUpdate(listOf(movie))
+
+        // verify set-bookmarked
+        localRepo.setBookmarked(movie.id).test().assertComplete()
+        db.bookmarkDao().getBookmark(movie.id).test().assertValue { it.bookmarked }
+
+        // verify un-bookmarked
+        localRepo.setUnBookmarked(movie.id).test().assertComplete()
+        db.bookmarkDao().getBookmark(movie.id).test().assertValue { !it.bookmarked }
     }
 
     @Test

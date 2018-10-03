@@ -16,11 +16,15 @@ class MoviesLocalData(private val db: MovieDatabase,
     }
 
     override fun setBookmarked(movieId: Int): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Completable.fromAction {
+            db.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movieId, bookmarked = true))
+        }.performOnBack(scheduler)
     }
 
     override fun setUnBookmarked(movieId: Int): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Completable.fromAction {
+            db.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movieId, bookmarked = false))
+        }.performOnBack(scheduler)
     }
 
     override fun saveMovies(movies: List<Movie>): Completable {
