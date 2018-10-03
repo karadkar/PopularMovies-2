@@ -15,11 +15,11 @@ class MoviesLocalData(private val db: MovieDatabase,
         return db.movieDao().getPopular().map { it -> it }
     }
 
-    override fun setBookmarked(movieId: String): Completable {
+    override fun setBookmarked(movieId: Int): Completable {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun setUnBookmarked(movieId: String): Completable {
+    override fun setUnBookmarked(movieId: Int): Completable {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
