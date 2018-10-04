@@ -12,7 +12,7 @@ import io.github.karadkar.popularmovies.data.local.MovieDatabase
 import io.github.karadkar.popularmovies.data.local.MovieEntity
 import io.github.karadkar.popularmovies.data.local.MoviesLocalData
 import io.github.karadkar.popularmovies.data.mapper.EntityMapper
-import io.github.karadkar.popularmovies.data.mapper.MovieMapper
+import io.github.karadkar.popularmovies.data.mapper.MovieEntityMapper
 import io.github.karadkar.popularmovies.data.remote.TmdbMoviesApi
 import io.github.karadkar.popularmovies.utils.AppConstants
 import io.github.karadkar.popularmovies.utils.RxScheduler
@@ -122,7 +122,7 @@ private val movieDataModule = module {
     }
 
     // mapper
-    single<EntityMapper<Movie, MovieEntity>> { MovieMapper() }
+    single<EntityMapper<Movie, MovieEntity>> { MovieEntityMapper() }
 
     // local data source
     single<MoviesDataContract.Local> {

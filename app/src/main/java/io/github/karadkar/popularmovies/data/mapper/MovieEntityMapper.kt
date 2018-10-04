@@ -3,7 +3,7 @@ package io.github.karadkar.popularmovies.data.mapper
 import io.github.karadkar.popularmovies.data.base.Movie
 import io.github.karadkar.popularmovies.data.local.MovieEntity
 
-class MovieMapper : EntityMapper<Movie, MovieEntity> {
+class MovieEntityMapper : EntityMapper<Movie, MovieEntity> {
 
     override fun mapFromEntiry(entity: Movie): MovieEntity {
         return MovieEntity(
