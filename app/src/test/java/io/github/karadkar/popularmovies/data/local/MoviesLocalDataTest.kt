@@ -2,7 +2,9 @@ package io.github.karadkar.popularmovies.data.local
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import io.github.karadkar.popularmovies.data.base.MoviesDataContract
-import io.github.karadkar.popularmovies.robolectricModules
+import io.github.karadkar.popularmovies.data.local.db.MovieDatabase
+import io.github.karadkar.popularmovies.data.local.models.MovieEntity
+import io.github.karadkar.popularmovies.data.robolectricModules
 import io.github.karadkar.popularmovies.utils.MovieEntityDataFactory
 import org.junit.After
 import org.junit.Before

@@ -1,4 +1,4 @@
-package io.github.karadkar.popularmovies
+package io.github.karadkar.popularmovies.utils
 
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

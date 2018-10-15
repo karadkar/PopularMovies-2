@@ -8,9 +8,9 @@ import io.github.karadkar.popularmovies.BuildConfig
 import io.github.karadkar.popularmovies.MovieListViewModel
 import io.github.karadkar.popularmovies.data.base.Movie
 import io.github.karadkar.popularmovies.data.base.MoviesDataContract
-import io.github.karadkar.popularmovies.data.local.MovieDatabase
-import io.github.karadkar.popularmovies.data.local.MovieEntity
 import io.github.karadkar.popularmovies.data.local.MoviesLocalData
+import io.github.karadkar.popularmovies.data.local.db.MovieDatabase
+import io.github.karadkar.popularmovies.data.local.models.MovieEntity
 import io.github.karadkar.popularmovies.data.mapper.EntityMapper
 import io.github.karadkar.popularmovies.data.mapper.MovieEntityMapper
 import io.github.karadkar.popularmovies.data.remote.TmdbMoviesApi

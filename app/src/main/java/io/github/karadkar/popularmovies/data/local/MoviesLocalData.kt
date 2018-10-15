@@ -2,6 +2,9 @@ package io.github.karadkar.popularmovies.data.local
 
 import io.github.karadkar.popularmovies.data.base.Movie
 import io.github.karadkar.popularmovies.data.base.MoviesDataContract
+import io.github.karadkar.popularmovies.data.local.db.MovieDatabase
+import io.github.karadkar.popularmovies.data.local.models.BookmarkEntity
+import io.github.karadkar.popularmovies.data.local.models.MovieEntity
 import io.github.karadkar.popularmovies.data.mapper.EntityMapper
 import io.github.karadkar.popularmovies.utils.RxScheduler
 import io.github.karadkar.popularmovies.utils.extensions.performOnBack

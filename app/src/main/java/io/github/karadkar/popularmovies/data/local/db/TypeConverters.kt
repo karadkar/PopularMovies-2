@@ -1,4 +1,4 @@
-package io.github.karadkar.popularmovies.data.local
+package io.github.karadkar.popularmovies.data.local.db
 
 import android.arch.persistence.room.TypeConverter
 import com.google.gson.Gson

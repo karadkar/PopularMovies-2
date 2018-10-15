@@ -1,6 +1,6 @@
 package io.github.karadkar.popularmovies.utils
 
-import io.github.karadkar.popularmovies.data.local.MovieEntity
+import io.github.karadkar.popularmovies.data.local.models.MovieEntity
 import io.github.karadkar.popularmovies.data.remote.models.Result
 
 object MovieEntityDataFactory {
