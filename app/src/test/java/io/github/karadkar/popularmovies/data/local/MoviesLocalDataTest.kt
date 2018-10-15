@@ -43,7 +43,17 @@ class MoviesLocalDataTest : KoinTest {
     @Test
     fun getPopularMovies() {
         db.movieDao().saveOrUpdate(movieEntities)
-        localRepo.getPopularMovies().test().assertValue(movieEntities.sortedByDescending { it.popularity })
+
+        // sort by popularity
+        movieEntities = movieEntities.sortedByDescending { it.popularity }
+
+        localRepo.getPopularMovies().test().apply {
+            assertNoErrors()
+            values()[0].forEachIndexed { index, movieListItem ->
+                // compare movie list item with entity
+                assert(movieListItem.equals(movieEntities[index]))
+            }
+        }
     }
 
     @Test

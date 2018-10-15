@@ -83,6 +83,32 @@ class MovieDatabaseTest : KoinTest {
     }
 
     @Test
+    fun getPopularMovieList() {
+        val size = 50
+        val movies = MovieEntityDataFactory.getMovieEntities(size).sortedByDescending { it.popularity }
+        database.movieDao().saveOrUpdate(movies)
+        movies.forEach { movie ->
+            // add bookmark to database
+            if (movie.id % 3 == 0) {
+                database.bookmarkDao().updateBookmark(BookmarkEntity(movieId = movie.id, bookmarked = true))
+            }
+        }
+
+        database.movieDao().getPopularList().test().apply {
+            assertNoErrors()
+            this.values()[0].forEachIndexed { index, item ->
+                val movie = movies[index]
+                // assert bookmark
+                assert(item.bookmarked == (movie.id % 3 == 0))
+
+                // assert sorted by popularity
+                assert(item.id == movie.id && item.title == movie.title
+                        && item.posterPath == movie.posterPath && item.votes == movie.voteAverage)
+            }
+        }
+    }
+
+    @Test
     fun updateBookmark() {
         val movies = MovieEntityDataFactory.getMovieEntities(50)
         database.movieDao().saveOrUpdate(movies)
