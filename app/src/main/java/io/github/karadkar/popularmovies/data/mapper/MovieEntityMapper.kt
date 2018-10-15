@@ -1,7 +1,7 @@
 package io.github.karadkar.popularmovies.data.mapper
 
 import io.github.karadkar.popularmovies.data.base.Movie
-import io.github.karadkar.popularmovies.data.local.MovieEntity
+import io.github.karadkar.popularmovies.data.local.models.MovieEntity
 
 class MovieEntityMapper : EntityMapper<Movie, MovieEntity> {
 

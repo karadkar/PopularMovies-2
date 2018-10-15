@@ -1,9 +1,10 @@
-package io.github.karadkar.popularmovies.data.local
+package io.github.karadkar.popularmovies.data.local.db
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
+import io.github.karadkar.popularmovies.data.local.models.BookmarkEntity
 import io.reactivex.Flowable
 
 @Dao

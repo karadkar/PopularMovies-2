@@ -1,6 +1,7 @@
-package io.github.karadkar.popularmovies.data.local
+package io.github.karadkar.popularmovies.data.local.db
 
 import android.arch.persistence.room.*
+import io.github.karadkar.popularmovies.data.local.models.MovieEntity
 import io.reactivex.Flowable
 
 @Dao

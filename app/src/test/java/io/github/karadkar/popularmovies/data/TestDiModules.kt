@@ -1,9 +1,8 @@
-package io.github.karadkar.popularmovies
+package io.github.karadkar.popularmovies.data
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import io.github.karadkar.popularmovies.data.appModules
-import io.github.karadkar.popularmovies.data.local.MovieDatabase
+import io.github.karadkar.popularmovies.data.local.db.MovieDatabase
 import io.github.karadkar.popularmovies.utils.RxScheduler
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers

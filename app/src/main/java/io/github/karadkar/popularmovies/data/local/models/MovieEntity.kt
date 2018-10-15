@@ -1,4 +1,4 @@
-package io.github.karadkar.popularmovies.data.local
+package io.github.karadkar.popularmovies.data.local.models
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

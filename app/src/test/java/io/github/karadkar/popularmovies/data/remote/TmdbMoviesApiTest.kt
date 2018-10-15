@@ -1,8 +1,8 @@
 package io.github.karadkar.popularmovies.data.remote
 
-import io.github.karadkar.popularmovies.mockResponse
-import io.github.karadkar.popularmovies.testApiServiceModules
+import io.github.karadkar.popularmovies.data.testApiServiceModules
 import io.github.karadkar.popularmovies.utils.JsonUtils
+import io.github.karadkar.popularmovies.utils.mockResponse
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
