@@ -1,6 +1,5 @@
 package io.github.karadkar.popularmovies
 
-import android.arch.lifecycle.ViewModel
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -11,24 +10,36 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.dsl.module.module
+import org.koin.standalone.StandAloneContext.loadKoinModules
 import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
 import org.koin.test.KoinTest
-import org.koin.test.declareMock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito
+import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
 class HomeScreenActivityTest : KoinTest {
     @Rule
     @JvmField
-    val rule = ActivityTestRule(HomeScreenActivity::class.java, true, true)
+    val rule = ActivityTestRule(HomeScreenActivity::class.java, true, false)
 
-    val viewModel: MovieListViewModel by inject()
+    lateinit var mockVm: MovieListViewModel
 
 
     @Before
     fun setup() {
-        declareMock<MovieListViewModel>(isFactory = true, binds = listOf(ViewModel::class))
+        mockVm = mock(MovieListViewModel::class.java)
+
+        /**
+         * As Activity only requires viewModel.
+         * also note, we override Application class as TestApp to avoid modules from main app.
+         */
+        loadKoinModules(module {
+            viewModel {
+                mockVm
+            }
+        })
     }
 
     @After
@@ -37,15 +48,21 @@ class HomeScreenActivityTest : KoinTest {
     }
 
     @Test
-    fun shouldHaveTextViewVisible() {
+    fun shouldHaveTextViewWithMessage() {
+        // 1. declare mock method
+        val message = "hello view-model"
+        Mockito.`when`(mockVm.sayHello())
+                .thenReturn(message)
 
-        `when`(viewModel.sayHello())
-                .thenReturn("hello view-model")
+        // 2. start activity
+        rule.launchActivity(null)
 
+
+        // 3. test
         onView(withId(R.id.tv_homescreen_message))
                 .check(matches(isDisplayed()))
 
         onView(withId(R.id.tv_homescreen_message))
-                .check(matches(withText("hello view-model")))
+                .check(matches(withText(message)))
     }
 }

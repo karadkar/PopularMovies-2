@@ -51,6 +51,7 @@ class MoviesLocalDataTest : KoinTest {
         localRepo.setBookmarked(9999).test().assertNotComplete()
         localRepo.setUnBookmarked(9999).test().assertNotComplete()
     }
+
     @Test
     fun setBookmarked() {
         val movie = MovieEntityDataFactory.getMovieEntity()

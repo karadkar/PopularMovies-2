@@ -8,12 +8,12 @@ import org.koin.android.ext.android.inject
 class HomeScreenActivity : AppCompatActivity() {
 
     // inject viewModel
-    private val viewModel: MovieListViewModel by inject()
+    val vm: MovieListViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
 
-        tv_homescreen_message.text = viewModel.sayHello()
+        tv_homescreen_message.text = vm.sayHello()
     }
 }
