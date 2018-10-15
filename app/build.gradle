@@ -48,7 +48,7 @@ dependencies {
 
     // architecture component
     implementation Libs.archExtensions
-    implementation Libs.archCoreTesting
+    testImplementation Libs.archCoreTesting
 
     // koin
     implementation Libs.koinAndroidViewModel
@@ -57,7 +57,6 @@ dependencies {
 
     // mockito
     testImplementation Libs.mockitoCore
-    androidTestImplementation Libs.mockitoAndroid
 
     // RxJava
     implementation Libs.rxJava
