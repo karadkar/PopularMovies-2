@@ -4,16 +4,15 @@ import io.github.karadkar.popularmovies.data.base.MoviesDataContract
 import io.github.karadkar.popularmovies.data.base.Outcome
 import io.github.karadkar.popularmovies.data.local.models.MovieListItem
 import io.github.karadkar.popularmovies.utils.RxScheduler
-import io.github.karadkar.popularmovies.utils.extensions.failed
-import io.github.karadkar.popularmovies.utils.extensions.loading
-import io.github.karadkar.popularmovies.utils.extensions.performOnBackObserverOnMain
-import io.github.karadkar.popularmovies.utils.extensions.success
+import io.github.karadkar.popularmovies.utils.extensions.*
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 
 class MoviesRepository(
         val local: MoviesDataContract.Local,
         val remote: MoviesDataContract.Remote,
-        val scheduler: RxScheduler
+        val scheduler: RxScheduler,
+        val compositeDisposable: CompositeDisposable
 ) : MoviesDataContract.Repository {
 
     override val result: PublishSubject<Outcome<List<MovieListItem>>> = PublishSubject.create<Outcome<List<MovieListItem>>>()
@@ -27,5 +26,6 @@ class MoviesRepository(
                 }, {
                     result.failed(it)
                 })
+                .addTo(compositeDisposable)
     }
 }

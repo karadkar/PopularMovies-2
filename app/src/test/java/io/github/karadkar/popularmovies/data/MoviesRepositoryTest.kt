@@ -6,6 +6,7 @@ import io.github.karadkar.popularmovies.data.local.models.MovieListItem
 import io.github.karadkar.popularmovies.utils.MovieEntityDataFactory
 import io.github.karadkar.popularmovies.utils.TestScheduler
 import io.reactivex.Flowable
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +25,7 @@ class MoviesRepositoryTest : AutoCloseKoinTest() {
     fun setup() {
         local = mock(MoviesDataContract.Local::class.java)
         remote = mock(MoviesDataContract.Remote::class.java)
-        repo = MoviesRepository(local, remote, TestScheduler())
+        repo = MoviesRepository(local, remote, TestScheduler(), CompositeDisposable())
     }
 
     @Test
