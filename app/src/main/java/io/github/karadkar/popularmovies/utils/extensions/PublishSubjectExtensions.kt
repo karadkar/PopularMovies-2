@@ -16,7 +16,6 @@ fun <T> PublishSubject<T>.toLiveData(compositeDisposable: CompositeDisposable): 
 // push failed events
 fun <T> PublishSubject<Outcome<T>>.failed(t: Throwable) {
     with(this) {
-        this.loading(false)
         onNext(Outcome.failure(t))
     }
 }
@@ -24,7 +23,6 @@ fun <T> PublishSubject<Outcome<T>>.failed(t: Throwable) {
 // push success events
 fun <T> PublishSubject<Outcome<T>>.success(data: T) {
     with(this) {
-        this.loading(false)
         onNext(Outcome.success(data))
     }
 }

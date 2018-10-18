@@ -22,8 +22,10 @@ class MoviesRepository(
                 .doOnSubscribe { result.loading(true) }
                 .performOnBackObserverOnMain(scheduler)
                 .subscribe({
+                    result.loading(false)
                     result.success(it)
                 }, {
+                    result.loading(false)
                     result.failed(it)
                 })
                 .addTo(compositeDisposable)
