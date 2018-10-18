@@ -4,6 +4,7 @@ import io.github.karadkar.popularmovies.data.local.models.MovieListItem
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import io.reactivex.subjects.PublishSubject
 
 interface MoviesDataContract {
     interface Local {
@@ -15,5 +16,10 @@ interface MoviesDataContract {
 
     interface Remote {
         fun getPopularMovies(): Single<List<Movie>>
+    }
+
+    interface Repository {
+        val result: PublishSubject<Outcome<List<MovieListItem>>>
+        fun getPopularMovies()
     }
 }

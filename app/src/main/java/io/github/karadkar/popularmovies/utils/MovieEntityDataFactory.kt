@@ -1,7 +1,12 @@
 package io.github.karadkar.popularmovies.utils
 
 import io.github.karadkar.popularmovies.data.local.models.MovieEntity
+import io.github.karadkar.popularmovies.data.local.models.MovieListItem
 import io.github.karadkar.popularmovies.data.remote.models.Result
+import io.github.karadkar.popularmovies.utils.DataFactory.randomBoolean
+import io.github.karadkar.popularmovies.utils.DataFactory.randomDouble
+import io.github.karadkar.popularmovies.utils.DataFactory.randomInt
+import io.github.karadkar.popularmovies.utils.DataFactory.randomString
 
 object MovieEntityDataFactory {
     fun getMovieEntity(movieId: Int = DataFactory.randomInt()): MovieEntity {
@@ -56,4 +61,20 @@ object MovieEntityDataFactory {
             }
         }
     }
+
+    fun getMovieListItems(size: Int = 10): List<MovieListItem> {
+        return ArrayList<MovieListItem>().apply {
+            for (i in 1..size) {
+                add(getMovieListItem(i))
+            }
+        }
+    }
+
+    fun getMovieListItem(id: Int = randomInt()) = MovieListItem(
+            id = id,
+            title = randomString(),
+            posterPath = randomString(),
+            votes = randomDouble(),
+            bookmarked = randomBoolean()
+    )
 }
