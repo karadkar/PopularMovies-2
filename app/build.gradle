@@ -64,7 +64,7 @@ dependencies {
 
     // mockito
     testImplementation Libs.mockitoCore
-    androidTestImplementation Libs.mockitoAndroid
+    androidTestImplementation Libs.mockk
 
     // RxJava
     implementation Libs.rxJava

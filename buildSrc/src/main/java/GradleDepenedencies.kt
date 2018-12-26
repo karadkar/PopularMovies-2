@@ -10,7 +10,7 @@ object Versions {
     val archExtensions = "1.1.1"
 
     val koin = "1.0.0"
-    val kotlin = "1.2.70"
+    val kotlin = "1.2.71"
 
     val androidTestSupportLib = "1.0.2"
     val espresso = "3.0.2"

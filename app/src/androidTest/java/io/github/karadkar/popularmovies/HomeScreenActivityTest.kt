@@ -3,6 +3,8 @@ package io.github.karadkar.popularmovies
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -13,8 +15,6 @@ import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.test.KoinTest
-import org.mockito.Mockito
-import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
 class HomeScreenActivityTest : KoinTest {
@@ -27,7 +27,7 @@ class HomeScreenActivityTest : KoinTest {
 
     @Before
     fun setup() {
-        mockVm = mock(MovieListViewModel::class.java)
+        mockVm = mockk()
 
         /**
          * As Activity only requires viewModel.
@@ -49,8 +49,7 @@ class HomeScreenActivityTest : KoinTest {
     fun shouldHaveTextViewWithMessage() {
         // 1. declare mock method
         val message = "hello view-model"
-        Mockito.`when`(mockVm.sayHello())
-                .thenReturn(message)
+        every { mockVm.sayHello() } returns message
 
         // 2. start activity
         rule.launchActivity(null)
