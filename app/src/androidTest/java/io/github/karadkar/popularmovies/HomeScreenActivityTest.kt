@@ -1,10 +1,8 @@
 package io.github.karadkar.popularmovies
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -59,10 +57,7 @@ class HomeScreenActivityTest : KoinTest {
 
 
         // 3. test
-        onView(withId(R.id.tv_homescreen_message))
-                .check(matches(isDisplayed()))
-
-        onView(withId(R.id.tv_homescreen_message))
-                .check(matches(withText(message)))
+        assertDisplayed(R.id.tv_homescreen_message) // with id
+        assertDisplayed(message) // with string
     }
 }

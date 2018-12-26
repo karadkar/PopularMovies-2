@@ -17,6 +17,8 @@ object Versions {
     val junit = "4.12"
     val mockito = "2.18.3"
     val mockitoKotlin = "1.5.0"
+    const val mockk = "1.8.13"
+    const val barista = "2.7.1"
 
     val retrofit = "2.3.0"
     val retrofitRxAdapter = "1.0.0"
@@ -61,6 +63,8 @@ object Libs {
     val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
     val mockitoAndroid = "org.mockito:mockito-android:${Versions.mockito}"
     val mockitoKotin = "com.nhaarman:mockito-kotlin:${Versions.mockitoKotlin}"
+    const val mockk = "io.mockk:mockk-android:${Versions.mockk}"
+    const val barista = "com.schibsted.spain:barista:${Versions.barista}"
 
     // retrofit
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

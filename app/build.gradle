@@ -48,7 +48,10 @@ dependencies {
     testImplementation Libs.junit
     androidTestImplementation Libs.atsRunner
     androidTestImplementation Libs.atsRules
-    androidTestImplementation Libs.espresso
+    androidTestImplementation(Libs.barista) {
+        exclude group: 'com.android.support'
+        exclude group: 'org.jetbrains.kotlin'
+    }
 
     // architecture component
     implementation Libs.archExtensions
