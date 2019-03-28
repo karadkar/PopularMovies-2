@@ -13,11 +13,11 @@ allOpen {
 
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "io.github.karadkar.popularmovies"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "io.github.karadkar.popularmovies.app.TestAppJUnitRunner"
